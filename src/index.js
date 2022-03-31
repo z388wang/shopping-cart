@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.js";
 import Home from "./pages/Home.js";
 import About from "./pages/About.js";
@@ -50,17 +50,27 @@ function App() {
     <BrowserRouter>
       <Navbar cart={cart} />
       <div className="container">
-        <Routes>
-          <Route exact path="/" element={<Home/>} />
-          <Route exact path="/about" element={<About/>} />
-          <Route exact path="/products" element={ <Products
+        <Switch>
+          <Route exact path="/" >
+            <Home/>
+          </Route>
+          <Route exact path="/about">
+            <About/>
+          </Route>
+          <Route exact path="/products">
+            <Products
               cart={cart}
               onProductAdd={handleProductAdd}
               onProductDelete={handleProductDelete}
-            />} />
-          <Route path="/products/:id" element={<ProductDetails onProductAdd={handleProductAdd} />} />
-          <Route exact path="/cart" element={<Cart cart={cart} />} />
-        </Routes>
+            />
+          </Route>
+          <Route path="/products/:id">
+            <ProductDetails onProductAdd={handleProductAdd} />
+          </Route>
+          <Route exact path="/cart">
+            <Cart cart={cart} />
+          </Route>
+        </Switch>
       </div>
     </BrowserRouter>
   );

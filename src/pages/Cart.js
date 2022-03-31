@@ -22,7 +22,7 @@ export default function Cart(props) {
     </tr>
   </thead>
   {cart.map((product) => 
-  <tbody>
+  <tbody key={product.id}>
     <tr>
       <td>
         <img width="30" height="30" alt="" scr={product.image} />

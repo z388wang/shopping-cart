@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {NavLink, Routes, Route, useParams, useMatch} from "react-router-dom";
+import {NavLink, Switch, Route, useParams, useRouteMatch} from "react-router-dom";
 import useFetch from "../hooks/useFetch.js";
 import ProductDetailInfo from "./ProductDetailInfo.js";
 import ProductDetailNutrition from "./ProductDetailNutrition.js";
@@ -10,7 +10,7 @@ export default function ProductDetails(props) {
   const [product, setProduct] = useState({});
   const { get } = useFetch("https://react-tutorial-demo.firebaseio.com/");
   const params = useParams();
-  const match = useMatch();
+  const match = useRouteMatch();
 
   useEffect(() => {
     get(`productinfo/id${params.id}.json`)
@@ -60,7 +60,7 @@ export default function ProductDetails(props) {
             </li>
           </ul>
         </div>
-        <Routes>
+        <Switch>
           <Route exact path={match.path}>
             <ProductDetailInfo product={product} onProductAdd={props.onProductAdd} />
           </Route>
@@ -72,7 +72,7 @@ export default function ProductDetails(props) {
           <Route path={match.path + "/storage"}>
             <ProductDetailStorage storage={product.storage} />
           </Route>
-        </Routes>
+        </Switch>
       </div>
     </div>
   );
